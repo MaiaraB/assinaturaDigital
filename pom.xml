@@ -11,5 +11,10 @@
       <artifactId>postgresql</artifactId>
       <version>9.4.1209</version>
     </dependency>
+    <dependency>
+    <groupId>com.miglayout</groupId>
+    <artifactId>miglayout-swing</artifactId>
+    <version>4.2</version>
+</dependency>
   </dependencies>
 </project>
