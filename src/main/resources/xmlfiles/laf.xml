@@ -1,0 +1,72 @@
+<synth>
+	<!-- <style id="backingStyle">
+    	<opaque value="TRUE"/>
+    	<font name="Verdana" size="12"/>
+    	<state>
+      		<color value="WHITE" type="BACKGROUND"/>
+	      	<color value="BLACK" type="FOREGROUND"/>
+    	</state>
+  	</style>
+  	<bind style="backingStyle" type="region" key=".*"/> -->
+  	
+  	<style id="buttonStyle">
+  		<property key="Button.textShiftOffset" type="integer" value="1"/>
+    	<insets top="15" left="20" right="20" bottom="15"/>
+    	<state>
+    		<color value="#003300" type="FOREGROUND"/>
+      		<!-- <imagePainter method="buttonBackground" path="/imagens/button1-click.gif"
+                    sourceInsets="10 10 10 10"/> -->
+            <color value="#cccc99" type="BACKGROUND"/>
+   		</state>
+   		<state value="MOUSE_OVER">
+   			<color value="#003300" type="FOREGROUND"/>
+   			<color value="#666633" type="BACKGROUND"/>
+   		</state> 
+  	</style>
+  	<bind style="buttonStyle" type="region" key="Button" />
+  	
+  	<style id="labelStyle">
+    	<state>
+    		<color value="WHITE" type="FOREGROUND" />
+    		<color value="BLACK" type="BACKGROUND" />
+   		</state>
+  	</style>
+  	<bind style="labelStyle" type="region" key="Label" />
+  	
+  	<style id="userPanelStyle">
+  		<opaque value="TRUE"/>
+    	<state>
+    		<color value="WHITE" type="FOREGROUND" />
+    		<color value="BLACK" type="BACKGROUND" />
+   		</state>
+  	</style>
+  	<bind style="userPanelStyle" type="name" key="painelUsuario" />
+  	
+  	<style id="tabbedPaneStyle">
+  		<opaque value="TRUE"/>
+    	<state>
+    		<color value="#363" type="TEXT_FOREGROUND" />
+    		<color value="#dfdfd0" type="BACKGROUND" />
+   		</state>
+  	</style>
+  	<bind style="tabbedPaneStyle" type="region" key="TabbedPane" />
+  	
+  	<style id="tabbedPaneTabStyle">
+  		<opaque value="TRUE"/>
+    	<state>
+    		<color value="#003300" type="TEXT_FOREGROUND" />
+    		<color value="WHITE" type="BACKGROUND" />
+   		</state>
+  	</style>
+  	<bind style="tabbedPaneTabStyle" type="region" key="TabbedPaneTab" />
+  	
+  	<style id="checkbox">
+    	<imageIcon id="check_off" path="images/checkbox_off.png"/>
+    	<imageIcon id="check_on" path="images/checkbox_on.png"/>
+    	<property key="CheckBox.icon" value="check_off"/>
+    	<state value="SELECTED">   
+      		<property key="CheckBox.icon" value="check_on"/>
+    	</state>
+  	</style>
+  	<bind style="checkbox" type="region" key="Checkbox"/>    
+</synth>

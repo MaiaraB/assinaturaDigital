@@ -24,7 +24,7 @@ public class JPanelWithBackground extends JPanel{
 		this.tiled = tiled;
 		this.width = backgroundImage.getWidth(this);
 		this.height = backgroundImage.getHeight(this);
-		this.setPreferredSize(new Dimension(this.width, this.height));
+		//this.setPreferredSize(new Dimension(this.width, this.height));
 		System.out.println(backgroundImage.getWidth(this)+", "+backgroundImage.getHeight(this));
 	}
 	
@@ -36,7 +36,7 @@ public class JPanelWithBackground extends JPanel{
 		this.height = backgroundImage.getHeight(this);
 		this.x = x;
 		this.y = y;
-		this.setPreferredSize(new Dimension(this.width + x, this.height + y));
+		//this.setPreferredSize(new Dimension(this.width + x, this.height + y));
 		//System.out.println(backgroundImage.getWidth(this)+", "+backgroundImage.getHeight(this));
 	}
 	
