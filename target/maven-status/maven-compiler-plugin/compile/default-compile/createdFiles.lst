@@ -1,10 +1,11 @@
-util/Util.class
-janelas/DocumentosTableModel.class
-janelas/JPanelHeader.class
-util/ITipoDocumento.class
-janelas/JanelaPrincipal.class
 janelas/JPanelWithBackground.class
 bd/AcessoBD.class
 util/Constantes.class
 util/TipoDocumento.class
+util/Util.class
+janelas/JanelaPrincipal$BooleanRenderer.class
+janelas/DocumentosTableModel.class
+janelas/JPanelHeader.class
+util/ITipoDocumento.class
+janelas/JanelaPrincipal.class
 janelas/JanelaPrincipal$1.class

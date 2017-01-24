@@ -3,6 +3,7 @@ package janelas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.io.IOException;
@@ -10,8 +11,11 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Set;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,9 +24,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingConstants;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.UIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
@@ -103,7 +113,6 @@ public class JanelaPrincipal {
 			tabbedPane.addTab("Documentos para assinar", docsAssinarPanel);
 			
 			JTable table;
-			JScrollPane scrollPane;
 			try {
 				docsAssinarPanel.setLayout(new MigLayout("", "10[]0[grow, fill]10", "10[]0[]0[]10"));
 				
@@ -130,7 +139,25 @@ public class JanelaPrincipal {
 			tabbedPane.addTab("Documentos assinados", docsAssinadosPanel);
 			
 			JScrollPane mainScroll = new JScrollPane(panel);
-			mainScroll.setBackground(new Color(242, 242, 238));
+			//mainScroll.setBackground(Color.RED);
+			//mainScroll.setBackground(new Color(242, 242, 238));
+			/*mainScroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+				@Override
+		        protected JButton createDecreaseButton(int orientation) {
+		            return new JButton("<");
+		        }
+
+		        @Override    
+		        protected JButton createIncreaseButton(int orientation) {
+		              return new JButton(">");
+		        }
+				
+				@Override 
+		        protected void configureScrollBarColors(){
+					this.thumbColor = new Color(204,204,153);
+					this.trackColor = new Color(247,248,250);
+		        }
+			});*/
 			mainPanel.add(mainScroll);
 			frame.getContentPane().add(mainPanel, "cell 0 0, grow, aligny top, alignx left");
 			
@@ -161,13 +188,13 @@ public class JanelaPrincipal {
 	    centerRendererTitle.setHorizontalAlignment(JLabel.CENTER);
 	    
 	    //Setando as cores e fonte
-	   // header.setBackground(new Color(31, 59, 8)); //1f3b08
-	   // header.setForeground(Color.WHITE);
+	    header.setBackground(new Color(31, 59, 8)); //1f3b08
+	    header.setForeground(Color.WHITE);
 	    header.setFont(new Font("Arial", Font.BOLD, 12));
 	   // table.setBackground(Color.WHITE);//#bdbdbd #e0e0e0 new Color(208, 208, 208)
 	   // table.setForeground(Color.BLACK);
 	    table.setFont(new Font("Arial", Font.PLAIN, 12));
-	    
+	    table.setDefaultRenderer(Boolean.class, new BooleanRenderer());
 	    return table;
 
 	}
@@ -252,22 +279,26 @@ public class JanelaPrincipal {
     }
 
 	private void initLookAndFeel() {
-		
+		/*
 		//SynthLookAndFeel laf = new SynthLookAndFeel();
-		//UIManager.put("nimbusBase", new Color(31,59,8));//247,248,250
+		UIManager.put("nimbusBase", new Color(31,59,8));//247,248,250
 		//UIManager.put("control", Color.RED);
-		UIManager.put("nimbusFocus", new Color(204,204,153));//cccc99
-		UIManager.put("TableHeader.background", new Color(31,59,8));
+		UIManager.put("nimbusFocus", new Color(204,204,153));//cccc99=204,204,153
+		//UIManager.put("TableHeader.background", new Color(31,59,8));
 		UIManager.put("Table.background", Color.WHITE);
 		UIManager.put("Table.alternateRowColor", Color.WHITE);
 		UIManager.put("Table.textForeground", Color.BLACK);
 		UIManager.put("Table.showGrid", true);
 		UIManager.put("Table.gridColor", new Color(208,208,208));
 		UIManager.put("Table[Enabled+Selected].textBackground", new Color(204,204,153));
-		UIManager.put("CheckBox.background", new Color(214,217,223));
-		UIManager.put("CheckBox[Disabled].textForeground", new Color(214,217,223));
 		UIManager.put("TabbedPane.background", Color.RED);
-		UIManager.put("TabbedPane.shadow", Color.RED);
+		UIManager.put("TabbedPane.shadow", Color.RED);*/
+		UIManager.put("ScrollPane.foreground", ColorUIResource.RED); //new Color(247,248,250)
+		/*UIDefaults defaults = UIManager.getLookAndFeelDefaults();
+		Set<Object> keys = defaults.keySet();
+		for (Object key : keys) {
+			System.out.println(key + ": " + defaults.get(key));
+		}*/
 		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -303,5 +334,47 @@ public class JanelaPrincipal {
 		catch (IllegalAccessException e) {
 		   // handle exception
 		}
+	}
+	
+	public static class BooleanRenderer extends JCheckBox implements TableCellRenderer, UIResource {
+		private static final Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
+		
+		public BooleanRenderer() {
+            super();
+            setHorizontalAlignment(JLabel.CENTER);
+            //setBorderPainted(true);
+            setOpaque(true);
+            //setText("Hello");
+        }
+		
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			
+			if (isSelected) {
+                setForeground(table.getSelectionForeground());
+                super.setBackground(table.getSelectionBackground());
+            } else {
+                setBackground(Color.WHITE);
+            }
+			setSelected((value != null && ((Boolean) value).booleanValue()));
+			
+			if (table.getValueAt(row, 0).equals(true)) {
+                setIcon(new ImageIcon(getClass().getResource("/imagens/checkbox-selected.jpg")));
+            } else {
+                setIcon(new ImageIcon(getClass().getResource("/imagens/checkbox.jpg")));
+            }
+
+            if (hasFocus && table.getValueAt(row, 0).equals(true)) {
+            	setIcon(new ImageIcon(getClass().getResource("/imagens/checkbox-selected-focused.jpg")));
+                //setBorder(UIManager.getBorder("Table.focusCellHighlightBorder"));
+            } else if (hasFocus && table.getValueAt(row, 0).equals(false)) {
+            	setIcon(new ImageIcon(getClass().getResource("/imagens/checkbox-focused.jpg")));
+                //setBorder(noFocusBorder);
+            }
+
+			
+			return this;
+		}
+		
 	}
 }
